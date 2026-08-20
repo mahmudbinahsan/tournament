@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#131320"/>
+  <g transform="translate(256, 256) scale(0.65)">
+    <!-- Trophy cup body -->
+    <path d="M -70 -100 L 70 -100 L 65 -20 Q 60 50 0 60 Q -60 50 -65 -20 Z"
+          fill="#DFC15C" stroke="#CDA838" stroke-width="3"/>
+    <!-- Trophy inner highlight -->
+    <path d="M -55 -90 L 55 -90 L 51 -25 Q 47 35 0 45 Q -47 35 -51 -25 Z"
+          fill="#E4D37E" opacity="0.5"/>
+    <!-- Trophy handles -->
+    <path d="M -70 -85 Q -110 -85 -110 -50 Q -110 -20 -75 -20"
+          fill="none" stroke="#DFC15C" stroke-width="10" stroke-linecap="round"/>
+    <path d="M 70 -85 Q 110 -85 110 -50 Q 110 -20 75 -20"
+          fill="none" stroke="#DFC15C" stroke-width="10" stroke-linecap="round"/>
+    <!-- Trophy stem -->
+    <rect x="-12" y="60" width="24" height="40" fill="#DFC15C"/>
+    <!-- Trophy base -->
+    <rect x="-55" y="100" width="110" height="16" rx="4" fill="#DFC15C"/>
+    <rect x="-65" y="116" width="130" height="10" rx="3" fill="#CDA838"/>
+    <!-- Trophy rim -->
+    <rect x="-75" y="-105" width="150" height="10" rx="3" fill="#CDA838"/>
+  </g>
+</svg>

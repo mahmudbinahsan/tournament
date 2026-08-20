@@ -1,0 +1,383 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --app-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  html {
+    font-family: var(--app-font-family);
+    background: var(--app-bg, #0E0E11);
+    color: var(--ink, #F4F6FA);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--app-bg, #0E0E11);
+    overscroll-behavior: none;
+    line-height: 1.6;
+    letter-spacing: -0.012em;
+    font-size: 16px;
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.024em;
+  }
+
+  .theme-switching,
+  .theme-switching *,
+  .theme-switching *::before,
+  .theme-switching *::after {
+    transition: background-color 220ms ease-out, border-color 220ms ease-out,
+      color 220ms ease-out, fill 220ms ease-out, stroke 220ms ease-out,
+      box-shadow 220ms ease-out, outline-color 220ms ease-out !important;
+  }
+
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  .pb-nav { padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px)); }
+
+  @media (max-width: 639px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  select {
+    background-color: var(--app-surface-2, #18181B);
+    color: var(--ink, #F4F6FA);
+  }
+  select option {
+    background-color: var(--app-surface-3, #1D1D21);
+    color: var(--ink, #F4F6FA);
+  }
+  option:checked {
+    background-color: var(--app-surface-3, #1D1D21);
+    color: var(--accent-300, #DCB866);
+  }
+
+  [data-theme-mode="light"] {
+    --toggle-inactive-track: rgba(60, 50, 35, 0.18);
+    --success-300: #059669; --success-400: #047857; --success-500: #10B981; --success-600: #065F46;
+    --warning-300: #D97706; --warning-400: #B45309; --warning-500: #F59E0B; --warning-600: #92400E;
+    --danger-300: #DC2626; --danger-400: #B91C1C; --danger-500: #EF4444; --danger-600: #991B1B;
+    --third-300: #EA580C; --third-400: #C2410C; --third-500: #F97316; --third-600: #9A3412;
+  }
+  [data-theme-mode="dark"] {
+    --toggle-inactive-track: rgba(255, 255, 255, 0.15);
+    --success-300: #6EE7B7; --success-400: #34D399; --success-500: #10B981; --success-600: #059669;
+    --warning-300: #FCD34D; --warning-400: #FBBF24; --warning-500: #F59E0B; --warning-600: #D97706;
+    --danger-300: #FCA5A5; --danger-400: #F87171; --danger-500: #EF4444; --danger-600: #DC2626;
+    --third-300: #FDBA74; --third-400: #FB923C; --third-500: #F97316; --third-600: #EA580C;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-400, #CDA23E);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  [data-theme="electric-blue"] body,
+  [data-theme="electric-blue"] .bg-app {
+    background-image:
+      radial-gradient(55% 45% at 12% 8%, rgba(14,148,201,0.08), transparent 62%),
+      radial-gradient(45% 38% at 88% 14%, rgba(91,184,232,0.05), transparent 60%),
+      radial-gradient(70% 55% at 50% 110%, rgba(14,148,201,0.06), transparent 64%);
+    background-color: var(--app-bg, #040814);
+  }
+
+  [data-theme="night-league"] body,
+  [data-theme="night-league"] .bg-app {
+    background-image:
+      radial-gradient(58% 42% at 8% 6%, rgba(92,167,221,0.09), transparent 64%),
+      radial-gradient(46% 38% at 92% 12%, rgba(240,212,0,0.045), transparent 62%),
+      radial-gradient(72% 54% at 50% 108%, rgba(61,130,185,0.07), transparent 66%);
+    background-color: var(--app-bg, #101013);
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--app-card, #1B1B1F);
+    border: 1px solid var(--app-border, rgba(255, 255, 255, 0.08));
+  }
+
+  .glass-interactive {
+    transition: background-color 200ms ease-out, border-color 200ms ease-out,
+      box-shadow 200ms ease-out, transform 200ms ease-out;
+  }
+
+  .glass-heavy {
+    background: var(--app-card, #1B1B1F);
+    border: 1px solid var(--app-border, rgba(255, 255, 255, 0.08));
+  }
+
+  .match-card-surface {
+    background: var(--app-match-card, var(--app-card, #1B1B1F));
+    border: 1px solid var(--app-match-border, var(--app-border, rgba(255, 255, 255, 0.08)));
+  }
+  .match-card-surface:hover {
+    background: var(--app-match-card-hover, var(--app-card-hover, #212125));
+    border-color: var(--app-match-border-strong, var(--app-border-strong, rgba(255,255,255,0.14)));
+  }
+
+  /* Zebra card surface — a subtly different shade (≈3-5% brightness) used to
+     alternate the background of consecutive cards in a vertical list. Falls
+     back to the regular card surface when a theme doesn't define it, so zebra
+     lists stay clean (no striping) on themes without a dedicated token. */
+  .zebra-card {
+    background: var(--app-zebra-card, var(--app-card, #1B1B1F));
+    border: 1px solid var(--app-border, rgba(255, 255, 255, 0.08));
+  }
+  .zebra-card:hover {
+    background: var(--app-zebra-card-hover, var(--app-card-hover, #212125));
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-card, 0 1px 2px 0 rgba(0,0,0,0.36), 0 6px 16px -6px rgba(0,0,0,0.48));
+  }
+
+  .card-shadow-hover {
+    box-shadow: var(--shadow-card-hover, 0 2px 6px 0 rgba(0,0,0,0.42), 0 12px 28px -8px rgba(0,0,0,0.56));
+  }
+
+  .bg-app {
+    background: var(--app-bg, #0E0E11);
+  }
+
+  .surface    { background: var(--app-surface, #141417); }
+  .surface-2  { background: var(--app-surface-2, #18181B); }
+  .surface-3  { background: var(--app-surface-3, #1D1D21); }
+
+  .accent-gradient {
+    background-image: linear-gradient(135deg, var(--gradient-from, #EAD29A), var(--gradient-to, #B88A2A));
+  }
+
+  /* Secondary accent gradient — aurora teal → amber on Aurora Noir,
+     falls back to the primary gradient on every other theme. */
+  .accent-gradient-secondary {
+    background-image: linear-gradient(135deg, var(--gradient-secondary-from, var(--gradient-from, #EAD29A)), var(--gradient-secondary-to, var(--gradient-to, #B88A2A)));
+  }
+
+  .accent-tint {
+    background: color-mix(in srgb, var(--accent-500, #B88A2A) 12%, transparent);
+  }
+
+  /* Premium elevated surface — a richer card panel. Falls back to the
+     regular card surface on themes that don't define it. */
+  .surface-elevated {
+    background: var(--app-surface-elevated, var(--app-card, #1B1B1F));
+  }
+
+  /* Refined slim scrollbar */
+  ::-webkit-scrollbar { width: 3px; height: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--ink-faint, #6B7588) 40%, transparent);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--ink-faint, #6B7588) 60%, transparent);
+  }
+
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  .pressable {
+    transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 160ms ease-out,
+                border-color 160ms ease-out,
+                box-shadow 160ms ease-out;
+  }
+  .pressable:active {
+    transform: scale(0.985);
+  }
+
+  /* ─── Slate Arena spotlight treatment ───────────────────────────────────
+     Scoped to [data-theme="slate-arena"] only — no other theme is affected.
+     Replaces flat bright-yellow fills on active controls with a soft gold
+     spotlight: a low-saturation gold background, a faint top inner highlight,
+     and a gentle shadow for depth. Active nav items, segmented controls,
+     selected chips, and primary buttons all pick this up automatically via
+     the shared .accent-gradient class, with bespoke rules where a fill alone
+     reads too neon (nav icon wraps, primary buttons). */
+  [data-theme='slate-arena'] .accent-gradient {
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0) 42%),
+      linear-gradient(135deg, rgba(223,193,92,0.15), rgba(223,193,92,0.07));
+    border: 1px solid rgba(223,193,92,0.30);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.045),
+      0 2px 7px -4px rgba(223,193,92,0.18);
+    color: var(--accent-200, #EDE0A0);
+  }
+  [data-theme='slate-arena'] .accent-gradient:hover {
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 42%),
+      linear-gradient(135deg, rgba(223,193,92,0.19), rgba(223,193,92,0.10));
+    border-color: rgba(223,193,92,0.38);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 2px 9px -4px rgba(223,193,92,0.22);
+  }
+  [data-theme='slate-arena'] .accent-gradient:active {
+    background-image:
+      linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 38%),
+      linear-gradient(135deg, rgba(223,193,92,0.14), rgba(223,193,92,0.07));
+    box-shadow:
+      inset 0 1px 2px rgba(0,0,0,0.20),
+      0 1px 3px -2px rgba(223,193,92,0.14);
+  }
+
+  /* Selected bottom-nav icon wraps: keep the spotlight, drop the neon glow. */
+  [data-theme='slate-arena'] .nav-icon-wrap.accent-gradient {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 2px 8px -5px rgba(223,193,92,0.18);
+  }
+  [data-theme='slate-arena'] .nav-icon-wrap .accent-gradient {
+    /* The blur halo behind the active icon — soften to a faint gold haze. */
+    opacity: 0.12;
+    filter: blur(8px);
+  }
+
+  /* Primary buttons: calmer brushed-gold rather than a bright gold slab.
+     The Button component uses text-gold-50 + accent-gradient + gold shadows;
+     override text to a soft warm white and tone the shadow down. */
+  [data-theme='night-league'] .accent-gradient {
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 42%),
+      linear-gradient(135deg, rgba(240,212,0,0.16), rgba(240,212,0,0.07));
+    border: 1px solid rgba(240,212,0,0.30);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 2px 8px -5px rgba(240,212,0,0.20);
+    color: var(--accent-200, #F9E866);
+  }
+  [data-theme='night-league'] .accent-gradient:hover {
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0) 42%),
+      linear-gradient(135deg, rgba(240,212,0,0.20), rgba(240,212,0,0.10));
+    border-color: rgba(240,212,0,0.38);
+  }
+  [data-theme='night-league'] .nav-icon-wrap.accent-gradient {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 2px 8px -5px rgba(240,212,0,0.18);
+  }
+  [data-theme='night-league'] .nav-icon-wrap .accent-gradient {
+    opacity: 0.12;
+    filter: blur(8px);
+  }
+  [data-theme='night-league'] .text-gold-50 {
+    color: #FFF5A8;
+  }
+  [data-theme='night-league'] .shadow-gold-500\/20,
+  [data-theme='slate-arena'] .text-gold-50 {
+    color: #F5EDC4;
+  }
+  [data-theme='slate-arena'] .shadow-gold-500\/20,
+  [data-theme='slate-arena'] .shadow-gold-500\/30,
+  [data-theme='slate-arena'] .shadow-gold-500\/25 {
+    box-shadow: 0 2px 8px -5px rgba(223,193,92,0.20);
+  }
+}
+
+@layer utilities {
+  @keyframes slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fade-in-soft {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33%       { transform: translateY(-8px) rotate(5deg); }
+    66%       { transform: translateY(-4px) rotate(-3deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 8px var(--glow-rgba, rgba(184,138,42,0.3)); }
+    50%       { box-shadow: 0 0 20px var(--glow-rgba, rgba(184,138,42,0.6)); }
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-slide-up   { animation: slide-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .animate-fade-in    { animation: fade-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .animate-fade-in-soft { animation: fade-in-soft 0.22s ease-out forwards; }
+  .animate-scale-in   { animation: scale-in 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .animate-float      { animation: float 3s ease-in-out infinite; }
+  .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+  .stagger > * { animation: fade-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .stagger > *:nth-child(1)  { animation-delay: 0.03s; }
+  .stagger > *:nth-child(2)  { animation-delay: 0.06s; }
+  .stagger > *:nth-child(3)  { animation-delay: 0.09s; }
+  .stagger > *:nth-child(4)  { animation-delay: 0.12s; }
+  .stagger > *:nth-child(5)  { animation-delay: 0.15s; }
+  .stagger > *:nth-child(6)  { animation-delay: 0.18s; }
+  .stagger > *:nth-child(7)  { animation-delay: 0.21s; }
+  .stagger > *:nth-child(8)  { animation-delay: 0.24s; }
+
+  .text-gradient-blue {
+    background: linear-gradient(135deg, var(--gradient-from, #EAD29A), var(--gradient-to, #B88A2A));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gradient-from, #EAD29A), var(--gradient-to, #B88A2A));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tabular-nums { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+
+  /* ─── Flag rendering ───────────────────────────────────────────────────────
+     Emoji flags render crisp and centered inside the rounded Flag container.
+     A faint inner highlight keeps them visible on dark surfaces. */
+  .flag-glyph {
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji',
+      'Twemoji Mozilla', 'EmojiOne Color', 'Android Emoji', sans-serif;
+    -webkit-font-smoothing: auto;
+  }
+}
