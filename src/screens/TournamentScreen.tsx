@@ -134,8 +134,33 @@ export function TournamentScreen({
   }
 
   function handleSimGroupStage() {
-    runProgressive(tournament.matches, 'group-stage', (results) => onApplyMatchResults(tournament.id, results));
-  }
+  const groupMatches = tournament.matches.filter(
+    (m) =>
+      m.phase === 'group' &&
+      m.status === 'pending' &&
+      m.teamA &&
+      m.teamB &&
+      !m.isBye,
+  );
+
+  if (groupMatches.length === 0) return;
+
+  const pendingRounds = [...new Set(groupMatches.map((m) => m.round))].sort(
+    (a, b) => a - b,
+  );
+
+  const currentRound = pendingRounds[0];
+
+  const currentRoundMatches = groupMatches.filter(
+    (m) => m.round === currentRound,
+  );
+
+  runProgressive(
+    currentRoundMatches,
+    'group-stage-round',
+    (results) => onApplyMatchResults(tournament.id, results),
+  );
+}
 
   function handleSimKnockoutRound() {
     runProgressive(tournament.matches, 'ko-round', (results) => onApplyMatchResults(tournament.id, results));
